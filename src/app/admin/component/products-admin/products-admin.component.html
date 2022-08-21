@@ -1,0 +1,137 @@
+<button class="btn btn-warning my-3" data-bs-toggle="modal" data-bs-target="#myModal">Add Product</button>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Categorie</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of products">
+      <td><img src="{{item.image}}" width="50px" height="50px" class="rounded-circle" alt=""></td>
+      <td>{{item.title}}</td>
+      <td>{{item.price}}</td>
+      <td>{{item.category}}</td>
+      <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myupdate" (click)="update(item)">Update</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal" id="myupdate">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="form" >
+          <div class="row">
+            <div class="col-4">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" formControlName="title" value="xsxs"   placeholder="Enter title">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" class="form-control"  formControlName="price"  placeholder="Enter price">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label >Categories</label>
+                <app-select [categories]="categories" [all]="false" [select]="form.value.category"  (filter)="selectedCategorie($event)"></app-select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <label >Image</label>
+              <br>
+              <img style="height: 80px;" src="{{base64}}" alt="">
+              <input class="form-control" type="file"  (change)="getImagePath($event)">
+            </div>
+            <div class="col-8">
+              <label >Description</label>
+              <textarea class="form-control" formControlName="description"  rows="3"></textarea>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" [disabled]="!form.valid" (click)="addProduct()">Add Product</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="form" >
+          <div class="row">
+            <div class="col-4">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" formControlName="title"   placeholder="Enter title">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" class="form-control"  formControlName="price"  placeholder="Enter price">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label >Categories</label>
+                <app-select [categories]="categories"  (filter)="selectedCategorie($event)"></app-select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <label >Image</label>
+              <br>
+              <img style="height: 80px;" src="{{base64}}" alt="">
+              <input class="form-control" type="file"  (change)="getImagePath($event)">
+            </div>
+            <div class="col-8">
+              <label >Description</label>
+              <textarea class="form-control" formControlName="description"  rows="3"></textarea>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" [disabled]="!form.valid" (click)="addProduct()">Add Product</button>
+      </div>
+
+    </div>
+  </div>
+</div>

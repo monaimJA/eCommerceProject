@@ -1,0 +1,13 @@
+<div class="alert alert-danger" *ngIf="errorMessage">
+  <strong>{{errorMessage}}</strong>
+</div>
+  <app-select [categories]="categories" [Loading]="Loading" (filter)="filterProducts($event)"></app-select>
+  <div class="row d-flex mx-auto mt-5" *ngIf="!errorMessage && !Loading">
+    <div class=" col-md-3 col-sm-12 mx-2 " *ngFor="let item of products">
+      <app-product [product]="item" (EventAdd)="addToCart($event)"></app-product>
+    </div>
+  </div>
+  <div class="text-center w-100 my-5" *ngIf="Loading">
+<spinner></spinner>
+  </div>
+

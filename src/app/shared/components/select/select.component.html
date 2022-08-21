@@ -1,0 +1,4 @@
+<select class="form-select w-25" aria-label="Default select example" (change)="filterProducts($event)" *ngIf="!Loading">
+  <option value="All" *ngIf="all" selected>All</option>
+  <option value="{{item}}" [selected]="item==select" *ngFor="let item of categories">{{item}}</option>
+</select>
